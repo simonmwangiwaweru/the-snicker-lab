@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — The Snicker Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+  <!-- Robots: do not index admin -->
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body>
+
+  <!-- Auth gate (shown when not logged in / not admin) -->
+  <div id="admin-gate"></div>
+
+  <!-- Admin panel (hidden until authenticated) -->
+  <div id="admin-panel" hidden>
+    <div class="admin-layout">
+
+      <!-- ═══════════ SIDEBAR ═══════════ -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__brand">
+          <div class="admin-brand-name">The Snicker<span>Lab</span></div>
+          <div class="admin-brand-tag">Admin Panel</div>
+        </div>
+
+        <nav class="admin-nav">
+          <div class="admin-nav__section">Main</div>
+          <button class="admin-nav__link active" data-view="dashboard">
+            <i class="ri-dashboard-line"></i><span>Dashboard</span>
+          </button>
+
+          <div class="admin-nav__section">Catalog</div>
+          <button class="admin-nav__link" data-view="products">
+            <i class="ri-shirt-line"></i><span>Products</span>
+          </button>
+
+          <div class="admin-nav__section">Sales</div>
+          <button class="admin-nav__link" data-view="orders">
+            <i class="ri-shopping-bag-line"></i><span>Orders</span>
+          </button>
+
+          <div class="admin-nav__section">Tools</div>
+          <a href="index.html" class="admin-nav__link" target="_blank">
+            <i class="ri-store-line"></i><span>View Store</span>
+          </a>
+        </nav>
+
+        <div class="admin-sidebar__footer">
+          <div class="admin-user-card">
+            <div class="admin-user-avatar" id="sb-user-avatar">A</div>
+            <div class="admin-user-info">
+              <p class="admin-user-name" id="sb-user-name">Admin</p>
+              <p class="admin-user-role">Administrator</p>
+            </div>
+            <button class="admin-logout-btn" id="admin-logout-btn" title="Sign out">
+              <i class="ri-logout-box-line"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ═══════════ MAIN ═══════════ -->
+      <div class="admin-main">
+
+        <!-- Top bar -->
+        <div class="admin-topbar">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <button class="btn-admin btn-admin--ghost" id="admin-menu-toggle" style="display:none;">
+              <i class="ri-menu-line"></i>
+            </button>
+            <h1 class="admin-page-title" id="admin-page-title">Dashboard</h1>
+          </div>
+          <div class="admin-topbar__actions">
+            <span style="font-size:12px;color:var(--clr-gray-2);" id="admin-last-sync"></span>
+            <button class="btn-admin btn-admin--ghost" onclick="location.reload()">
+              <i class="ri-refresh-line"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="admin-content">
+
+          <!-- ─── DASHBOARD VIEW ─── -->
+          <div class="admin-view active" id="view-dashboard">
+
+            <!-- Stats -->
+            <div class="admin-stats">
+              <div class="stat-card" style="--stat-color:#22c55e;">
+                <i class="ri-money-dollar-circle-line stat-card__icon"></i>
+                <span class="stat-card__label">Total Revenue</span>
+                <span class="stat-card__value" id="stat-revenue">$0</span>
+                <span class="stat-card__change">All time</span>
+              </div>
+              <div class="stat-card" style="--stat-color:#00E5FF;">
+                <i class="ri-shopping-bag-line stat-card__icon"></i>
+                <span class="stat-card__label">Total Orders</span>
+                <span class="stat-card__value" id="stat-orders">0</span>
+                <span class="stat-card__change">All time</span>
+              </div>
+              <div class="stat-card" style="--stat-color:#FF3D00;">
+                <i class="ri-shirt-line stat-card__icon"></i>
+                <span class="stat-card__label">Products</span>
+                <span class="stat-card__value" id="stat-products">0</span>
+                <span class="stat-card__change">In catalog</span>
+              </div>
+              <div class="stat-card" style="--stat-color:#eab308;">
+                <i class="ri-bar-chart-line stat-card__icon"></i>
+                <span class="stat-card__label">Avg. Order</span>
+                <span class="stat-card__value" id="stat-avg-order">$0</span>
+                <span class="stat-card__change">Per order</span>
+              </div>
+            </div>
+
+            <!-- Recent orders quick list -->
+            <div class="admin-table-wrap" style="padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h2 style="font-size:16px;font-weight:600;color:var(--clr-white);">Recent Orders</h2>
+                <button class="btn-admin btn-admin--ghost btn-admin--sm" data-view="orders" onclick="document.querySelector('[data-view=orders]').click()">
+                  View All <i class="ri-arrow-right-line"></i>
+                </button>
+              </div>
+              <div id="recent-orders-list"></div>
+            </div>
+          </div>
+
+          <!-- ─── PRODUCTS VIEW ─── -->
+          <div class="admin-view" id="view-products">
+            <div class="admin-table-wrap">
+              <div class="admin-table-header">
+                <h2 class="admin-table-header__title">Products</h2>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <input type="text" id="products-search" class="admin-search" placeholder="Search products…">
+                  <button class="btn-admin btn-admin--ghost btn-admin--sm" id="seed-btn" onclick="seedProducts()">
+                    <i class="ri-database-2-line"></i> Seed Default Products
+                  </button>
+                  <button class="btn-admin btn-admin--primary" onclick="openAddProduct()">
+                    <i class="ri-add-line"></i> Add Product
+                  </button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="products-tbody">
+                  <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--clr-gray-2);">Loading products…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ─── ORDERS VIEW ─── -->
+          <div class="admin-view" id="view-orders">
+            <div class="admin-table-wrap">
+              <div class="admin-table-header">
+                <h2 class="admin-table-header__title">Orders</h2>
+                <input type="text" id="orders-search" class="admin-search" placeholder="Search by ID or customer…">
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody">
+                  <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--clr-gray-2);">Loading orders…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div><!-- /admin-content -->
+      </div><!-- /admin-main -->
+    </div><!-- /admin-layout -->
+
+    <!-- ═══════════ PRODUCT MODAL ═══════════ -->
+    <div class="admin-modal-backdrop" id="admin-modal-backdrop"></div>
+
+    <div class="admin-modal" id="product-modal">
+      <div class="admin-modal__header">
+        <h2 class="admin-modal__title" id="product-modal-title">Add Product</h2>
+        <button class="admin-modal__close" aria-label="Close"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="product-form">
+        <div class="admin-modal__body">
+          <div class="admin-form-grid">
+            <div class="admin-field">
+              <label class="admin-label" for="pf-brand">Brand *</label>
+              <select id="pf-brand" class="admin-select" required>
+                <option value="">Select brand</option>
+                <option>Nike</option>
+                <option>Jordan</option>
+                <option>Adidas</option>
+                <option>Puma</option>
+                <option>New Balance</option>
+                <option>Converse</option>
+                <option>Reebok</option>
+                <option>Vans</option>
+              </select>
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="pf-sku">SKU</label>
+              <input type="text" id="pf-sku" class="admin-input" placeholder="Auto-generated if blank">
+            </div>
+          </div>
+
+          <div class="admin-field">
+            <label class="admin-label" for="pf-name">Product Name *</label>
+            <input type="text" id="pf-name" class="admin-input" placeholder="e.g. Air Force 1 '07 Low" required>
+          </div>
+
+          <div class="admin-form-grid">
+            <div class="admin-field">
+              <label class="admin-label" for="pf-price">Price ($) *</label>
+              <input type="number" id="pf-price" class="admin-input" placeholder="110" min="0" step="0.01" required>
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="pf-old-price">Compare Price ($)</label>
+              <input type="number" id="pf-old-price" class="admin-input" placeholder="130 (optional)" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div class="admin-form-grid">
+            <div class="admin-field">
+              <label class="admin-label" for="pf-stock">Stock Qty</label>
+              <input type="number" id="pf-stock" class="admin-input" placeholder="24" min="0">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="pf-badge">Badge</label>
+              <select id="pf-badge" class="admin-select">
+                <option value="">None</option>
+                <option value="new">New</option>
+                <option value="sale">Sale</option>
+                <option value="hot">Hot</option>
+                <option value="exclusive">Exclusive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-field">
+            <label class="admin-label" for="pf-sizes">Available Sizes (comma-separated)</label>
+            <input type="text" id="pf-sizes" class="admin-input" placeholder="7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 12">
+          </div>
+
+          <div class="admin-field admin-form-grid full">
+            <label class="admin-label" for="pf-description">Description</label>
+            <textarea id="pf-description" class="admin-textarea" placeholder="Product description…"></textarea>
+          </div>
+        </div>
+        <div class="admin-modal__footer">
+          <button type="button" class="btn-admin btn-admin--ghost admin-modal__close">Cancel</button>
+          <button type="submit" class="btn-admin btn-admin--primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+
+  </div><!-- /admin-panel -->
+
+  <script type="module" src="./js/admin.js"></script>
+</body>
+</html>

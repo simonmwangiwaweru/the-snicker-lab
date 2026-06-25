@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Snicker Lab — Premium Sneakers. Shop Nike, Air Force, Jordan and more." />
+  <title>The Snicker Lab | Premium Sneakers</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23FF3D00'/><text y='.9em' font-size='75' x='12'>S</text></svg>" />
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/polish.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- Scroll progress + Back to top -->
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+
+  <!-- Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Page transition overlay -->
+  <div id="page-transition"></div>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="The Snicker Lab home">
+        <div class="nav__logo-mark">SL</div>
+        <span class="nav__logo-text">The Snicker<span>Lab</span></span>
+      </a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link active">Home</a></li>
+        <li class="nav__dropdown">
+          <a href="shop.html" class="nav__link">
+            Shop <i class="ri-arrow-down-s-line" style="font-size:.85em;vertical-align:-1px;"></i>
+          </a>
+          <div class="nav__dropdown-menu" role="menu">
+            <a href="shop.html?brand=nike"    class="nav__dropdown-item">Nike</a>
+            <a href="shop.html?brand=jordan"  class="nav__dropdown-item">Jordan</a>
+            <a href="shop.html?brand=adidas"  class="nav__dropdown-item">Adidas</a>
+            <a href="shop.html?brand=puma"    class="nav__dropdown-item">Puma</a>
+            <a href="shop.html?brand=nb"      class="nav__dropdown-item">New Balance</a>
+            <a href="shop.html"               class="nav__dropdown-item">All Brands</a>
+          </div>
+        </li>
+        <li><a href="shop.html?filter=new"  class="nav__link">New Drops</a></li>
+        <li><a href="shop.html?filter=sale" class="nav__link">Sale</a></li>
+        <li><a href="#about"                class="nav__link">About</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search">
+          <i class="ri-search-line"></i>
+        </button>
+        <button class="nav__icon-btn" aria-label="Account">
+          <i class="ri-user-line"></i>
+        </button>
+        <a href="cart.html" class="nav__icon-btn" aria-label="Cart">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="nav__cart-count" aria-live="polite">0</span>
+        </a>
+        <span class="magnetic">
+          <a href="shop.html" class="btn btn--primary btn--nav">Shop Now</a>
+        </span>
+        <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile-menu" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <a href="index.html"            class="nav__mobile-link">Home</a>
+    <a href="shop.html"             class="nav__mobile-link">Shop</a>
+    <a href="shop.html?filter=new"  class="nav__mobile-link">New Drops</a>
+    <a href="shop.html?filter=sale" class="nav__mobile-link">Sale</a>
+    <a href="#about"                class="nav__mobile-link">About</a>
+    <div class="nav__mobile-divider"></div>
+    <div class="nav__mobile-actions">
+      <a href="cart.html"  class="btn btn--outline">My Cart</a>
+      <a href="shop.html"  class="btn btn--primary">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ──────────────────────────────────────
+         HERO
+    ────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero">
+
+      <!-- Background -->
+      <div class="hero__bg">
+        <div class="hero__bg-gradient"></div>
+        <div class="hero__bg-grid"></div>
+      </div>
+
+      <!-- Content grid -->
+      <div class="container hero__content">
+
+        <!-- Left: Text -->
+        <div class="hero__text">
+          <span class="hero__eyebrow">New Season · 2025 Collection</span>
+
+          <h1 class="hero__title">
+            <span class="hero__title-line">FIND</span>
+            <span class="hero__title-line hero__title-line--outline">YOUR</span>
+            <span class="hero__title-line hero__title-line--accent">SOLE</span>
+          </h1>
+
+          <p class="hero__subtitle">
+            Premium sneakers for those who move with purpose.
+            Every step, a statement.
+          </p>
+
+          <div class="hero__ctas">
+            <span class="magnetic">
+              <a href="shop.html" class="btn btn--primary hero__cta-primary">
+                <i class="ri-shopping-bag-line"></i> Shop Collection
+              </a>
+            </span>
+            <span class="magnetic">
+              <a href="#drops" class="btn btn--outline hero__cta-secondary">
+                <span class="hero__play-icon"><i class="ri-arrow-down-line"></i></span>
+                Latest Drops
+              </a>
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Shoe -->
+        <div class="hero__shoe-container" aria-hidden="true">
+          <div class="hero__shoe-glow"></div>
+          <div class="hero__shoe-ring"></div>
+          <div class="hero__shoe-ring-2"></div>
+
+          <div class="hero__shoe-wrap" id="hero-shoe">
+            <!-- SVG Sneaker — Air Force 1 style, side view -->
+            <svg class="hero__shoe-svg" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="upperGrad" cx="50%" cy="40%" r="60%">
+                  <stop offset="0%"   stop-color="#ffffff"/>
+                  <stop offset="100%" stop-color="#e8e8e8"/>
+                </radialGradient>
+                <radialGradient id="toeGrad" cx="30%" cy="40%" r="60%">
+                  <stop offset="0%"   stop-color="#f8f8f8"/>
+                  <stop offset="100%" stop-color="#e0e0e0"/>
+                </radialGradient>
+                <linearGradient id="soleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="#e4e4e4"/>
+                  <stop offset="100%" stop-color="#cccccc"/>
+                </linearGradient>
+                <linearGradient id="outSoleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="#1c1c1c"/>
+                  <stop offset="100%" stop-color="#0a0a0a"/>
+                </linearGradient>
+                <filter id="shoeDropShadow" x="-5%" y="-5%" width="110%" height="120%">
+                  <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.45"/>
+                </filter>
+                <filter id="innerGlow">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+              </defs>
+
+              <!-- Ground shadow ellipse -->
+              <ellipse cx="400" cy="415" rx="280" ry="16" fill="rgba(0,0,0,0.3)" filter="url(#shoeDropShadow)"/>
+
+              <g filter="url(#shoeDropShadow)">
+
+                <!-- ── OUTSOLE (black rubber) ── -->
+                <path d="
+                  M105,348 C108,362 148,378 260,384
+                  C360,390 520,386 640,372
+                  C680,366 700,354 698,340
+                  L688,326 C660,342 570,360 420,364
+                  C270,368 148,358 108,338 Z
+                " fill="url(#outSoleGrad)"/>
+
+                <!-- Outsole tread lines -->
+                <line x1="150" y1="375" x2="170" y2="378" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="200" y1="380" x2="220" y2="382" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="250" y1="383" x2="270" y2="385" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="300" y1="384" x2="320" y2="385" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="380" y1="383" x2="400" y2="383" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="460" y1="380" x2="480" y2="378" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="550" y1="370" x2="570" y2="366" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+                <line x1="620" y1="355" x2="640" y2="348" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+
+                <!-- ── MIDSOLE (white/cream) ── -->
+                <path d="
+                  M108,338 C148,358 270,368 420,364
+                  C570,360 660,342 688,326
+                  L692,300 C660,318 568,336 420,340
+                  C272,344 148,334 112,314 Z
+                " fill="url(#soleGrad)"/>
+
+                <!-- Midsole orange accent stripe -->
+                <path d="
+                  M130,326 C200,334 340,338 490,332
+                  C580,328 650,316 680,306
+                  L680,310 C648,322 576,334 488,338
+                  C340,344 198,340 128,332 Z
+                " fill="rgba(255,61,0,0.55)"/>
+
+                <!-- ── MAIN UPPER BODY ── -->
+                <path d="
+                  M112,314 C148,334 272,344 420,340
+                  C568,336 660,318 692,300
+                  C700,278 698,248 682,228
+                  C650,190 560,160 450,152
+                  C340,144 240,158 180,188
+                  C140,208 115,248 108,290 Z
+                " fill="url(#upperGrad)"/>
+
+                <!-- ── TOE BOX ── -->
+                <path d="
+                  M112,314 C115,280 130,248 160,225
+                  C180,210 210,196 240,188
+                  C210,210 175,248 165,300 Z
+                " fill="url(#toeGrad)"/>
+
+                <!-- Toe box stitching -->
+                <path d="M168,300 C176,248 208,216 245,196"
+                      stroke="#d0d0d0" stroke-width="1.8" fill="none" stroke-dasharray="7,5"/>
+
+                <!-- ── QUARTER PANEL ── -->
+                <path d="
+                  M240,188 C310,168 390,158 470,162
+                  C530,165 590,180 630,200
+                  L628,205 C586,184 525,170 465,168
+                  C384,164 306,174 238,196 Z
+                " fill="#efefef"/>
+
+                <!-- Panel stitching -->
+                <path d="M244,194 C316,174 398,164 472,168 C534,172 592,186 632,206"
+                      stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-dasharray="8,6"/>
+
+                <!-- ── HEEL COUNTER ── -->
+                <path d="
+                  M620,158 C658,165 690,195 698,235
+                  C703,258 700,285 692,300
+                  C682,282 670,252 660,228
+                  C648,200 636,178 620,158 Z
+                " fill="#e0e0e0"/>
+
+                <!-- Heel stitching -->
+                <path d="M625,165 C660,178 688,215 694,258"
+                      stroke="#cacaca" stroke-width="1.5" fill="none" stroke-dasharray="6,5"/>
+
+                <!-- Heel branding tab -->
+                <rect x="650" y="252" width="34" height="50" rx="5" fill="#FF3D00"/>
+                <text x="667" y="282" text-anchor="middle" fill="white"
+                      font-size="11" font-family="Arial" font-weight="900" letter-spacing="0">SV</text>
+
+                <!-- ── ANKLE COLLAR ── -->
+                <path d="
+                  M542,152 C578,148 618,158 645,180
+                  C660,192 670,212 668,232
+                  C648,212 620,194 590,182
+                  C570,174 554,168 542,152 Z
+                " fill="#dcdcdc"/>
+
+                <!-- Collar padding detail -->
+                <path d="M546,158 C582,154 620,165 648,188 C662,200 670,218 666,236"
+                      stroke="#c8c8c8" stroke-width="2" fill="none"/>
+
+                <!-- ── TONGUE ── -->
+                <path d="
+                  M372,148 C390,140 430,138 450,148
+                  L455,228 C440,222 400,222 368,228 Z
+                " fill="#f6f6f6"/>
+                <path d="M411,144 L411,226" stroke="#e0e0e0" stroke-width="1.5"/>
+                <!-- Tongue label -->
+                <rect x="400" y="175" width="22" height="28" rx="3" fill="#FF3D00"/>
+                <text x="411" y="193" text-anchor="middle" fill="white"
+                      font-size="9" font-family="Arial" font-weight="900">SV</text>
+
+                <!-- ── LACE SYSTEM ── -->
+                <!-- Lace backing panel -->
+                <path d="
+                  M282,165 C300,155 350,148 412,146
+                  C468,144 515,148 545,158
+                  L545,230 C514,225 466,220 410,222
+                  C354,224 304,228 282,240 Z
+                " fill="#eeeeee"/>
+
+                <!-- Horizontal laces -->
+                <path d="M294,178 Q414,168 534,178" stroke="white" stroke-width="6"
+                      fill="none" stroke-linecap="round"/>
+                <path d="M294,196 Q414,186 534,196" stroke="white" stroke-width="6"
+                      fill="none" stroke-linecap="round"/>
+                <path d="M294,214 Q414,204 534,214" stroke="white" stroke-width="6"
+                      fill="none" stroke-linecap="round"/>
+                <path d="M296,232 Q414,222 534,232" stroke="white" stroke-width="5"
+                      fill="none" stroke-linecap="round" opacity="0.7"/>
+
+                <!-- Eyelet verticals -->
+                <line x1="330" y1="170" x2="330" y2="238" stroke="#d5d5d5" stroke-width="2.5"/>
+                <line x1="370" y1="166" x2="370" y2="234" stroke="#d5d5d5" stroke-width="2.5"/>
+                <line x1="450" y1="164" x2="450" y2="232" stroke="#d5d5d5" stroke-width="2.5"/>
+                <line x1="490" y1="166" x2="490" y2="234" stroke="#d5d5d5" stroke-width="2.5"/>
+                <line x1="530" y1="168" x2="530" y2="236" stroke="#d5d5d5" stroke-width="2.5"/>
+
+                <!-- Eyelets (circles) -->
+                <circle cx="330" cy="174" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="330" cy="192" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="330" cy="210" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="330" cy="228" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="370" cy="172" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="370" cy="190" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="370" cy="208" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="370" cy="226" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="450" cy="168" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="450" cy="186" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="450" cy="204" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="450" cy="222" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="490" cy="170" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="490" cy="188" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="490" cy="206" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="490" cy="224" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="530" cy="172" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="530" cy="190" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="530" cy="208" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                <circle cx="530" cy="226" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+
+                <!-- ── BRAND SWOOSH (orange) ── -->
+                <path d="
+                  M195,286 C240,256 340,242 455,254
+                  C520,262 575,278 568,298
+                  C530,282 430,270 320,284
+                  C268,292 210,306 195,286 Z
+                " fill="#FF3D00"/>
+
+                <!-- Swoosh shine -->
+                <path d="
+                  M205,278 C248,258 346,247 460,259
+                " stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                <!-- ── PERFORATIONS on toe ── -->
+                <circle cx="135" cy="270" r="3" fill="#e8e8e8"/>
+                <circle cx="148" cy="258" r="3" fill="#e8e8e8"/>
+                <circle cx="148" cy="280" r="3" fill="#e8e8e8"/>
+                <circle cx="160" cy="248" r="3" fill="#e8e8e8"/>
+                <circle cx="160" cy="268" r="3" fill="#e8e8e8"/>
+                <circle cx="160" cy="288" r="3" fill="#e8e8e8"/>
+                <circle cx="172" cy="242" r="3" fill="#e8e8e8"/>
+                <circle cx="172" cy="260" r="3" fill="#e8e8e8"/>
+                <circle cx="172" cy="278" r="3" fill="#e8e8e8"/>
+
+              </g>
+            </svg>
+          </div><!-- /shoe-wrap -->
+        </div><!-- /shoe-container -->
+
+      </div><!-- /hero__content -->
+
+      <!-- Stats bar -->
+      <div class="hero__stats" aria-label="Store stats">
+        <div class="hero__stat">
+          <div class="hero__stat-value"><span data-count="500">0</span><span>+</span></div>
+          <p class="hero__stat-label">Styles</p>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value"><span data-count="20">0</span><span>+</span></div>
+          <p class="hero__stat-label">Brands</p>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value"><span data-count="50000">0</span><span>+</span></div>
+          <p class="hero__stat-label">Happy Customers</p>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value"><span data-count="4">0</span><span>.9★</span></div>
+          <p class="hero__stat-label">Avg Rating</p>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-text">Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+
+    </section><!-- /hero -->
+
+    <!-- ──────────────────────────────────────
+         BRAND MARQUEE
+    ────────────────────────────────────── -->
+    <section class="marquee-section" aria-label="Brands we carry">
+      <div class="marquee-track" aria-hidden="true">
+        <!-- Duplicated for seamless infinite loop -->
+        <div class="marquee-item"><span class="marquee-item-name">Nike</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Jordan</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Adidas</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Puma</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">New Balance</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Converse</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Reebok</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Vans</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Under Armour</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Asics</span><span class="marquee-dot"></span></div>
+        <!-- Duplicate set -->
+        <div class="marquee-item"><span class="marquee-item-name">Nike</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Jordan</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Adidas</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Puma</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">New Balance</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Converse</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Reebok</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Vans</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Under Armour</span><span class="marquee-dot"></span></div>
+        <div class="marquee-item"><span class="marquee-item-name">Asics</span><span class="marquee-dot"></span></div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         LATEST DROPS
+    ────────────────────────────────────── -->
+    <section class="drops-section" id="drops" aria-label="Latest drops">
+      <div class="container">
+
+        <div class="section-header" data-anim="fade-up">
+          <div>
+            <p class="section-eyebrow">Just Landed</p>
+            <h2 class="section-title">LATEST<br/>DROPS</h2>
+          </div>
+          <a href="shop.html?filter=new" class="section-link">
+            View All <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+
+        <div class="drops-grid" data-anim="card-grid">
+
+          <!-- Card 1: Nike Air Force 1 -->
+          <article class="product-card" data-id="nike-af1-white">
+            <div class="product-card__img-wrap">
+              <div class="product-card__bg" style="background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);"></div>
+              <!-- Shoe SVG scaled for card -->
+              <svg class="product-card__shoe" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="cg1-sole" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#e0e0e0"/><stop offset="100%" stop-color="#c8c8c8"/>
+                  </linearGradient>
+                </defs>
+                <ellipse cx="400" cy="415" rx="280" ry="14" fill="rgba(0,0,0,0.15)"/>
+                <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#111"/>
+                <path d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="url(#cg1-sole)"/>
+                <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="white"/>
+                <path d="M195,255 C235,228 320,218 420,230 C480,238 530,252 522,268 C490,258 400,248 305,262 C255,270 195,280 195,255 Z" fill="#FF3D00"/>
+                <rect x="300" y="158" width="260" height="58" rx="8" fill="#f0f0f0"/>
+                <path d="M310,173 Q430,163 555,173" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M310,190 Q430,180 555,190" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M310,207 Q430,197 555,207" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M430,155 C448,145 478,143 495,155 L498,216 C480,209 440,209 425,216 Z" fill="#f8f8f8"/>
+                <rect x="640" y="220" width="26" height="42" rx="4" fill="#FF3D00"/>
+              </svg>
+              <span class="product-card__badge badge--new">New</span>
+              <button class="product-card__wish" aria-label="Add to wishlist">
+                <i class="ri-heart-line"></i>
+              </button>
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__brand">Nike</p>
+              <h3 class="product-card__name">Air Force 1 '07 Low</h3>
+              <div class="product-card__meta">
+                <div class="product-card__price">
+                  <span class="product-card__price-current">$110</span>
+                </div>
+                <div class="product-card__sizes" aria-label="Available sizes">
+                  <span class="product-card__size-dot available" title="US 7"></span>
+                  <span class="product-card__size-dot available" title="US 8"></span>
+                  <span class="product-card__size-dot available" title="US 9"></span>
+                  <span class="product-card__size-dot available" title="US 10"></span>
+                  <span class="product-card__size-dot" title="US 11 — Sold out"></span>
+                </div>
+              </div>
+              <button class="product-card__add">
+                <i class="ri-shopping-bag-line"></i> Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 2: Jordan 1 Retro -->
+          <article class="product-card" data-id="jordan-1-red">
+            <div class="product-card__img-wrap">
+              <div class="product-card__bg" style="background: linear-gradient(135deg, #1a0000 0%, #2d0606 60%, #1a0000 100%);"></div>
+              <svg class="product-card__shoe" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="cg2-upper" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#cc0000"/><stop offset="100%" stop-color="#8b0000"/>
+                  </linearGradient>
+                </defs>
+                <ellipse cx="400" cy="415" rx="280" ry="14" fill="rgba(0,0,0,0.3)"/>
+                <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#0a0a0a"/>
+                <path d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="#e0e0e0"/>
+                <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="url(#cg2-upper)"/>
+                <!-- Black toe panel -->
+                <path d="M125,278 C128,250 142,220 170,200 C192,184 218,178 240,178 C215,205 182,240 172,296 Z" fill="#111"/>
+                <!-- White stripe -->
+                <path d="M195,255 C235,228 320,218 420,230 C480,238 530,252 522,268 C490,258 400,248 305,262 C255,270 195,280 195,255 Z" fill="white"/>
+                <rect x="300" y="158" width="260" height="58" rx="8" fill="#bb0000" opacity="0.8"/>
+                <path d="M310,173 Q430,163 555,173" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M310,190 Q430,180 555,190" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M310,207 Q430,197 555,207" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M430,155 C448,145 478,143 495,155 L498,216 C480,209 440,209 425,216 Z" fill="#cc0000"/>
+                <rect x="640" y="220" width="26" height="42" rx="4" fill="#111"/>
+              </svg>
+              <span class="product-card__badge badge--hot">Hot</span>
+              <button class="product-card__wish" aria-label="Add to wishlist">
+                <i class="ri-heart-line"></i>
+              </button>
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__brand">Jordan</p>
+              <h3 class="product-card__name">Air Jordan 1 Retro High OG</h3>
+              <div class="product-card__meta">
+                <div class="product-card__price">
+                  <span class="product-card__price-current">$180</span>
+                  <span class="product-card__price-old">$210</span>
+                </div>
+                <div class="product-card__sizes" aria-label="Available sizes">
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot" title="Sold out"></span>
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                </div>
+              </div>
+              <button class="product-card__add">
+                <i class="ri-shopping-bag-line"></i> Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <!-- Card 3: Adidas Ultraboost -->
+          <article class="product-card" data-id="adidas-ub23-black">
+            <div class="product-card__img-wrap">
+              <div class="product-card__bg" style="background: linear-gradient(135deg, #001a2e 0%, #003050 60%, #001520 100%);"></div>
+              <svg class="product-card__shoe" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="cg3-upper" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#0d0d1a"/>
+                  </linearGradient>
+                  <linearGradient id="cg3-boost" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#0099aa"/>
+                  </linearGradient>
+                </defs>
+                <ellipse cx="400" cy="415" rx="280" ry="14" fill="rgba(0,0,0,0.4)"/>
+                <!-- Outsole -->
+                <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#0a0a0a"/>
+                <!-- Boost midsole (cyan glow) -->
+                <path d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="url(#cg3-boost)"/>
+                <!-- Upper — knit texture effect -->
+                <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="url(#cg3-upper)"/>
+                <!-- Knit lines -->
+                <path d="M180,250 Q320,230 460,240 Q550,246 600,260" stroke="rgba(255,255,255,0.08)" stroke-width="2" fill="none"/>
+                <path d="M175,265 Q320,247 465,257 Q555,263 604,276" stroke="rgba(255,255,255,0.08)" stroke-width="2" fill="none"/>
+                <path d="M176,280 Q322,264 468,274 Q556,280 603,292" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none"/>
+                <!-- Three-stripe accent -->
+                <path d="M510,168 L530,300" stroke="#00E5FF" stroke-width="10" opacity="0.9" stroke-linecap="round"/>
+                <path d="M545,172 L560,300" stroke="#00E5FF" stroke-width="10" opacity="0.7" stroke-linecap="round"/>
+                <path d="M580,180 L588,298" stroke="#00E5FF" stroke-width="10" opacity="0.5" stroke-linecap="round"/>
+                <!-- Lace area -->
+                <rect x="300" y="158" width="260" height="58" rx="8" fill="rgba(0,180,210,0.15)"/>
+                <path d="M310,173 Q430,163 555,173" stroke="rgba(0,229,255,0.7)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M310,190 Q430,180 555,190" stroke="rgba(0,229,255,0.7)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M310,207 Q430,197 555,207" stroke="rgba(0,229,255,0.7)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <!-- Tongue -->
+                <path d="M430,155 C448,145 478,143 495,155 L498,216 C480,209 440,209 425,216 Z" fill="#1e1e3a"/>
+                <rect x="640" y="220" width="26" height="42" rx="4" fill="#00E5FF"/>
+              </svg>
+              <span class="product-card__badge badge--sale">−15%</span>
+              <button class="product-card__wish" aria-label="Add to wishlist">
+                <i class="ri-heart-line"></i>
+              </button>
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__brand">Adidas</p>
+              <h3 class="product-card__name">Ultraboost 23 Running</h3>
+              <div class="product-card__meta">
+                <div class="product-card__price">
+                  <span class="product-card__price-current">$153</span>
+                  <span class="product-card__price-old">$180</span>
+                </div>
+                <div class="product-card__sizes" aria-label="Available sizes">
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                  <span class="product-card__size-dot available"></span>
+                </div>
+              </div>
+              <button class="product-card__add">
+                <i class="ri-shopping-bag-line"></i> Add to Cart
+              </button>
+            </div>
+          </article>
+
+        </div><!-- /drops-grid -->
+      </div>
+    </section><!-- /drops -->
+
+    <!-- ──────────────────────────────────────
+         FEATURED COLLECTION
+    ────────────────────────────────────── -->
+    <section class="featured-section" id="about" aria-label="Featured collection">
+      <div class="container">
+        <div class="featured-grid">
+
+          <!-- Left: Visual -->
+          <div class="featured-visual" data-anim="slide-left">
+            <div class="featured-visual__bg-text" aria-hidden="true">AF1</div>
+            <svg class="featured-visual__shoe" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="fv-sole" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#c0c0c0"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="400" cy="415" rx="280" ry="14" fill="rgba(255,61,0,0.2)"/>
+              <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#111"/>
+              <path d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="url(#fv-sole)"/>
+              <!-- Orange accent sole -->
+              <path d="M135,316 C200,324 330,328 480,322 C570,318 640,306 670,296 L670,300 C640,312 568,324 480,328 C328,334 196,330 132,322 Z" fill="#FF3D00"/>
+              <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="white"/>
+              <path d="M125,278 C128,250 142,220 170,200 C192,184 218,178 240,178 C215,205 182,240 172,296 Z" fill="#f7f7f7"/>
+              <path d="M195,255 C240,224 345,214 455,228 C518,238 574,256 566,278 C530,264 420,252 316,268 C262,278 196,292 195,255 Z" fill="#FF3D00"/>
+              <path d="M205,244 C248,222 350,215 462,230" stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <rect x="300" y="158" width="260" height="58" rx="8" fill="#f0f0f0"/>
+              <path d="M310,173 Q430,163 555,173" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M310,190 Q430,180 555,190" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M310,207 Q430,197 555,207" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M430,155 C448,145 478,143 495,155 L498,216 C480,209 440,209 425,216 Z" fill="#f8f8f8"/>
+              <rect x="640" y="215" width="32" height="52" rx="5" fill="#FF3D00"/>
+              <text x="656" y="246" text-anchor="middle" fill="white" font-size="12" font-family="Arial" font-weight="900">SV</text>
+            </svg>
+            <div class="featured-visual__tag">
+              <span class="featured-visual__tag-dot"></span>
+              Limited Drop — 48 pairs left
+            </div>
+          </div>
+
+          <!-- Right: Text -->
+          <div class="featured-text" data-anim="slide-right">
+            <div>
+              <p class="section-eyebrow">Editor's Pick</p>
+              <h2 class="featured-text__title">
+                AIR FORCE<br/><em>COLLECTION</em>
+              </h2>
+            </div>
+
+            <p class="featured-text__desc">
+              The iconic silhouette that defined street culture.
+              Crafted from premium leather with our exclusive
+              The Snicker Lab colorways — available only here.
+            </p>
+
+            <div class="featured-text__features">
+              <div class="featured-feature">
+                <div class="featured-feature__icon"><i class="ri-shield-check-line"></i></div>
+                <div class="featured-feature__text">
+                  <strong>100% Authentic</strong>
+                  <span>Direct from brand, verified guaranteed</span>
+                </div>
+              </div>
+              <div class="featured-feature">
+                <div class="featured-feature__icon"><i class="ri-truck-line"></i></div>
+                <div class="featured-feature__text">
+                  <strong>Free Shipping</strong>
+                  <span>Orders over $100 — next day available</span>
+                </div>
+              </div>
+              <div class="featured-feature">
+                <div class="featured-feature__icon"><i class="ri-refresh-line"></i></div>
+                <div class="featured-feature__text">
+                  <strong>30-Day Returns</strong>
+                  <span>No questions asked, free return label</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="featured-text__cta">
+              <div class="featured-price-tag">
+                <small>From</small> $110
+              </div>
+              <span class="magnetic">
+                <a href="shop.html?brand=nike" class="btn btn--primary" style="padding:var(--space-4) var(--space-8);">
+                  Shop Nike <i class="ri-arrow-right-line"></i>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /featured -->
+
+    <!-- ──────────────────────────────────────
+         CTA BANNER
+    ────────────────────────────────────── -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="cta-banner__bg"></div>
+      <div class="cta-banner__bg-text" aria-hidden="true">STEP UP</div>
+
+      <div class="container cta-banner__content">
+        <span class="cta-banner__eyebrow" data-anim="fade-in">Premium · Exclusive · Authentic</span>
+
+        <h2 class="cta-banner__title" data-anim="fade-up">
+          STEP INTO<br/><em>GREATNESS</em>
+        </h2>
+
+        <p class="cta-banner__sub" data-anim="fade-up">
+          Over 500 styles. 20+ iconic brands.
+          Every pair verified authentic and ready to ship.
+        </p>
+
+        <div class="cta-banner__actions" data-anim="fade-up">
+          <span class="magnetic">
+            <a href="shop.html" class="btn btn--primary cta-banner__btn">
+              Shop All Sneakers <i class="ri-arrow-right-line"></i>
+            </a>
+          </span>
+          <span class="magnetic">
+            <a href="shop.html?filter=sale" class="btn btn--outline cta-banner__btn">
+              View Sale Items
+            </a>
+          </span>
+        </div>
+      </div>
+    </section><!-- /cta -->
+
+  </main><!-- /main-content -->
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__main">
+
+        <!-- Brand column -->
+        <div class="footer__brand">
+          <div class="footer__brand-logo">
+            <div class="footer__brand-mark">SL</div>
+            <span class="footer__brand-name">The Snicker<span>Lab</span></span>
+          </div>
+          <p class="footer__desc">
+            Your destination for premium sneakers.
+            Every pair authenticated, every style curated.
+            Shop bold, live bold.
+          </p>
+          <div class="footer__social" aria-label="Follow us">
+            <a href="#" class="footer__social-btn" aria-label="Instagram">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="#" class="footer__social-btn" aria-label="TikTok">
+              <i class="ri-tiktok-line"></i>
+            </a>
+            <a href="#" class="footer__social-btn" aria-label="Twitter / X">
+              <i class="ri-twitter-x-line"></i>
+            </a>
+            <a href="#" class="footer__social-btn" aria-label="YouTube">
+              <i class="ri-youtube-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Shop column -->
+        <div>
+          <h3 class="footer__col-title">Shop</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="shop.html?brand=nike"   class="footer__link">Nike</a></li>
+            <li><a href="shop.html?brand=jordan" class="footer__link">Jordan</a></li>
+            <li><a href="shop.html?brand=adidas" class="footer__link">Adidas</a></li>
+            <li><a href="shop.html?brand=puma"   class="footer__link">Puma</a></li>
+            <li><a href="shop.html?filter=new"   class="footer__link">New Drops</a></li>
+            <li><a href="shop.html?filter=sale"  class="footer__link">Sale</a></li>
+          </ul>
+        </div>
+
+        <!-- Help column -->
+        <div>
+          <h3 class="footer__col-title">Help</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#" class="footer__link">Size Guide</a></li>
+            <li><a href="#" class="footer__link">Shipping Info</a></li>
+            <li><a href="#" class="footer__link">Returns</a></li>
+            <li><a href="#" class="footer__link">Authentication</a></li>
+            <li><a href="#" class="footer__link">FAQ</a></li>
+            <li><a href="#" class="footer__link">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Company column -->
+        <div>
+          <h3 class="footer__col-title">Company</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#about"  class="footer__link">About Us</a></li>
+            <li><a href="#"       class="footer__link">Sell With Us</a></li>
+            <li><a href="#"       class="footer__link">Careers</a></li>
+            <li><a href="#"       class="footer__link">Blog</a></li>
+            <li><a href="#"       class="footer__link">Press</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /footer__main -->
+
+      <!-- Bottom bar -->
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          &copy; 2026 <span>The Snicker Lab</span>. All rights reserved.
+        </p>
+        <div class="footer__legal">
+          <a href="#" class="footer__legal-link">Privacy Policy</a>
+          <a href="#" class="footer__legal-link">Terms of Service</a>
+          <a href="#" class="footer__legal-link">Cookie Policy</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════ -->
+  <script type="module">
+    import { SoleCursor, MagneticEffect } from './js/cursor.js';
+    import { SoleNav }                    from './js/nav.js';
+    import { initBaseAnimations, initPageTransitions } from './js/animations.js';
+    import { initHome }                   from './js/home.js';
+    import { initCartDrawer, refreshBadges } from './js/cart.js';
+    import { initPolish }                 from './js/polish.js';
+    import { initAuth }                   from './js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new SoleCursor();
+      new MagneticEffect();
+      new SoleNav();
+      initCartDrawer();
+      refreshBadges();
+      initPolish();
+      initAuth();
+      initHome();
+
+      window.addEventListener('load', () => {
+        initBaseAnimations();
+        initPageTransitions();
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — The Snicker Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/polish.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="checkout-body">
+
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+  <div id="cursor-dot"  class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
+  <div class="page-transition" id="page-transition"></div>
+
+  <!-- ══════════════════════════ CHECKOUT HEADER ════════════════════════════ -->
+  <header class="checkout-header">
+    <div class="checkout-header__inner">
+      <a href="index.html" class="checkout-header__logo">The Snicker<span>Lab</span></a>
+
+      <!-- Progress Steps -->
+      <nav class="checkout-progress" aria-label="Checkout progress">
+        <div class="checkout-step active" data-step="1">
+          <div class="checkout-step__circle">
+            <span class="checkout-step__num">1</span>
+            <i class="ri-check-line checkout-step__check"></i>
+          </div>
+          <span class="checkout-step__label">Information</span>
+        </div>
+        <div class="checkout-progress__connector"></div>
+        <div class="checkout-step" data-step="2">
+          <div class="checkout-step__circle">
+            <span class="checkout-step__num">2</span>
+            <i class="ri-check-line checkout-step__check"></i>
+          </div>
+          <span class="checkout-step__label">Shipping</span>
+        </div>
+        <div class="checkout-progress__connector"></div>
+        <div class="checkout-step" data-step="3">
+          <div class="checkout-step__circle">
+            <span class="checkout-step__num">3</span>
+            <i class="ri-check-line checkout-step__check"></i>
+          </div>
+          <span class="checkout-step__label">Payment</span>
+        </div>
+      </nav>
+
+      <a href="cart.html" class="checkout-header__back">
+        <i class="ri-arrow-left-line"></i> Back to cart
+      </a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════ CHECKOUT LAYOUT ════════════════════════════ -->
+  <main class="checkout-page">
+    <div class="checkout-page__inner">
+
+      <!-- ── Left: Form column ─────────────────────────────────────────── -->
+      <div class="checkout-form-col">
+
+        <!-- ─ STEP 1: Contact & Shipping Info ──────────────────────────── -->
+        <section class="checkout-form-panel" data-checkout-step="1">
+          <h2 class="checkout-panel__title">Contact &amp; Shipping Information</h2>
+
+          <div class="form-grid form-grid--2">
+            <div class="form-group">
+              <label class="form-label" for="co-first-name">First Name</label>
+              <input type="text" id="co-first-name" class="form-input" placeholder="John" autocomplete="given-name">
+              <p class="form-error"></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-last-name">Last Name</label>
+              <input type="text" id="co-last-name" class="form-input" placeholder="Doe" autocomplete="family-name">
+              <p class="form-error"></p>
+            </div>
+          </div>
+
+          <div class="form-grid form-grid--2">
+            <div class="form-group">
+              <label class="form-label" for="co-email">Email Address</label>
+              <input type="email" id="co-email" class="form-input" placeholder="john@email.com" autocomplete="email">
+              <p class="form-error"></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-phone">Phone Number</label>
+              <input type="tel" id="co-phone" class="form-input" placeholder="+1 555 000 0000" autocomplete="tel">
+              <p class="form-error"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="co-address">Street Address</label>
+            <input type="text" id="co-address" class="form-input" placeholder="123 Main Street, Apt 4B" autocomplete="street-address">
+            <p class="form-error"></p>
+          </div>
+
+          <div class="form-grid form-grid--3">
+            <div class="form-group">
+              <label class="form-label" for="co-city">City</label>
+              <input type="text" id="co-city" class="form-input" placeholder="New York" autocomplete="address-level2">
+              <p class="form-error"></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-state">State / Province</label>
+              <input type="text" id="co-state" class="form-input" placeholder="NY" autocomplete="address-level1">
+              <p class="form-error"></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-zip">ZIP / Postal Code</label>
+              <input type="text" id="co-zip" class="form-input" placeholder="10001" autocomplete="postal-code">
+              <p class="form-error"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="co-country">Country</label>
+            <select id="co-country" class="form-input form-select" autocomplete="country">
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="NG">Nigeria</option>
+              <option value="GH">Ghana</option>
+              <option value="ZA">South Africa</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="JP">Japan</option>
+              <option value="OTHER">Other</option>
+            </select>
+            <p class="form-error"></p>
+          </div>
+
+          <div class="checkout-step-nav">
+            <span></span>
+            <button class="btn btn--primary checkout-next-btn magnetic" data-step-next>
+              <span class="magnetic__inner">
+                Continue to Shipping <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ─ STEP 2: Shipping Method ────────────────────────────────── -->
+        <section class="checkout-form-panel" data-checkout-step="2" style="display:none;">
+          <h2 class="checkout-panel__title">Shipping Method</h2>
+
+          <div id="shipping-options" class="shipping-options-list"></div>
+
+          <div class="checkout-step-nav">
+            <button class="btn btn--outline checkout-back-btn" data-step-back>
+              <i class="ri-arrow-left-line"></i> Back
+            </button>
+            <button class="btn btn--primary checkout-next-btn magnetic" data-step-next>
+              <span class="magnetic__inner">
+                Continue to Payment <i class="ri-arrow-right-line"></i>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ─ STEP 3: Payment ─────────────────────────────────────────── -->
+        <section class="checkout-form-panel" data-checkout-step="3" style="display:none;">
+          <h2 class="checkout-panel__title">Payment Details</h2>
+
+          <div class="payment-icons-row">
+            <i class="ri-visa-line"></i>
+            <i class="ri-mastercard-line"></i>
+            <i class="ri-paypal-line"></i>
+            <span class="payment-secure-note"><i class="ri-shield-check-line"></i> 256-bit SSL encrypted</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="co-card-name">Name on Card</label>
+            <input type="text" id="co-card-name" class="form-input" placeholder="John Doe" autocomplete="cc-name">
+            <p class="form-error"></p>
+          </div>
+
+          <div class="form-group form-group--card-number">
+            <label class="form-label" for="co-card-number">Card Number</label>
+            <div class="form-input-icon-wrap">
+              <i class="ri-bank-card-line form-input-icon"></i>
+              <input type="text" id="co-card-number" class="form-input form-input--with-icon" placeholder="1234 5678 9012 3456" autocomplete="cc-number" maxlength="19" inputmode="numeric">
+            </div>
+            <p class="form-error"></p>
+          </div>
+
+          <div class="form-grid form-grid--2">
+            <div class="form-group">
+              <label class="form-label" for="co-card-expiry">Expiry Date</label>
+              <input type="text" id="co-card-expiry" class="form-input" placeholder="MM/YY" autocomplete="cc-exp" maxlength="5" inputmode="numeric">
+              <p class="form-error"></p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="co-card-cvv">
+                CVV
+                <span class="form-tooltip" title="3 digits on back of card (4 for Amex)">
+                  <i class="ri-question-line"></i>
+                </span>
+              </label>
+              <input type="text" id="co-card-cvv" class="form-input" placeholder="123" autocomplete="cc-csc" maxlength="4" inputmode="numeric">
+              <p class="form-error"></p>
+            </div>
+          </div>
+
+          <!-- Promo (last chance) -->
+          <div class="promo-section" style="margin-top:var(--space-6);">
+            <label class="promo-section__label" for="co-promo-input">Promo Code</label>
+            <div class="promo-section__row">
+              <input type="text" id="co-promo-input" class="promo-input" placeholder="e.g. SNICK10" autocomplete="off">
+              <button class="btn btn--outline promo-apply-btn" id="co-promo-apply">Apply</button>
+            </div>
+            <p id="co-promo-msg" style="display:none;font-size:.85rem;margin-top:.5rem;"></p>
+          </div>
+
+          <div class="checkout-step-nav">
+            <button class="btn btn--outline checkout-back-btn" data-step-back>
+              <i class="ri-arrow-left-line"></i> Back
+            </button>
+            <button class="btn btn--primary checkout-next-btn magnetic" data-step-next>
+              <span class="magnetic__inner">
+                <i class="ri-lock-line"></i> Place Order
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ─ CONFIRMATION ────────────────────────────────────────────── -->
+        <section class="checkout-confirmation" id="checkout-confirmation" style="display:none;">
+          <div class="conf-checkmark">
+            <i class="ri-check-line"></i>
+          </div>
+          <div class="conf-body">
+            <h1 class="conf-title">Order Confirmed!</h1>
+            <p class="conf-sub">Thank you for shopping with The Snicker Lab. Your sneakers are on their way.</p>
+
+            <div class="conf-order-box">
+              <div class="conf-order-row">
+                <span>Order ID</span>
+                <strong id="conf-order-id">—</strong>
+              </div>
+              <div class="conf-order-row">
+                <span>Email</span>
+                <strong id="conf-email">—</strong>
+              </div>
+              <div class="conf-order-row">
+                <span>Items</span>
+                <strong id="conf-item-count">—</strong>
+              </div>
+              <div class="conf-order-row">
+                <span>Estimated Delivery</span>
+                <strong id="conf-shipping-eta">—</strong>
+              </div>
+              <div class="conf-order-row conf-order-row--total">
+                <span>Total Charged</span>
+                <strong id="conf-total">—</strong>
+              </div>
+            </div>
+
+            <p class="conf-note">
+              A confirmation email will be sent to your inbox shortly.
+              For any questions, contact <a href="mailto:support@thesnickerlab.com">support@thesnickerlab.com</a>
+            </p>
+
+            <div class="conf-actions">
+              <a href="shop.html" class="btn btn--primary magnetic">
+                <span class="magnetic__inner">Continue Shopping <i class="ri-arrow-right-line"></i></span>
+              </a>
+              <a href="index.html" class="btn btn--outline">Back to Home</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ── Right: Order Summary ──────────────────────────────────────── -->
+      <aside class="checkout-summary-col" aria-label="Order summary">
+        <div class="checkout-summary-panel">
+          <h2 class="checkout-summary__title">Order Summary</h2>
+
+          <div id="checkout-summary-items" class="checkout-summary__items"></div>
+
+          <div class="checkout-summary__divider"></div>
+
+          <div class="checkout-summary__lines">
+            <div class="checkout-summary__line">
+              <span>Subtotal</span>
+              <span id="co-subtotal">$0.00</span>
+            </div>
+            <div class="checkout-summary__line" id="co-discount-row" style="display:none;">
+              <span style="color:#22c55e;"><i class="ri-coupon-3-line"></i> Discount</span>
+              <span id="co-discount" style="color:#22c55e;">-$0.00</span>
+            </div>
+            <div class="checkout-summary__line">
+              <span>Shipping</span>
+              <span id="co-shipping">$0.00</span>
+            </div>
+            <div class="checkout-summary__line">
+              <span>Tax (8%)</span>
+              <span id="co-tax">$0.00</span>
+            </div>
+          </div>
+
+          <div class="checkout-summary__total">
+            <span>Total</span>
+            <span id="co-total">$0.00</span>
+          </div>
+
+          <div class="checkout-summary__trust">
+            <i class="ri-shield-check-line"></i>
+            <span>Secure 256-bit SSL checkout</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module">
+    import { SoleCursor, MagneticEffect } from './js/cursor.js';
+    import { initCheckout }               from './js/checkout.js';
+    import { refreshBadges }              from './js/cart.js';
+    import { initPolish }                 from './js/polish.js';
+
+    new SoleCursor();
+    new MagneticEffect();
+    refreshBadges();
+    initPolish();
+    initCheckout();
+  </script>
+</body>
+</html>

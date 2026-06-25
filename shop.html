@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shop premium sneakers at The Snicker Lab — Nike, Jordan, Adidas, Puma and more." />
+  <title>Shop | The Snicker Lab</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23FF3D00'/><text y='.9em' font-size='75' x='12'>S</text></svg>" />
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/shop.css" />
+  <link rel="stylesheet" href="css/polish.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="page-transition"></div>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="The Snicker Lab home">
+        <div class="nav__logo-mark">SL</div>
+        <span class="nav__logo-text">The Snicker<span>Lab</span></span>
+      </a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li class="nav__dropdown">
+          <a href="shop.html" class="nav__link active">
+            Shop <i class="ri-arrow-down-s-line" style="font-size:.85em;vertical-align:-1px;"></i>
+          </a>
+          <div class="nav__dropdown-menu" role="menu">
+            <a href="shop.html?brand=nike"         class="nav__dropdown-item">Nike</a>
+            <a href="shop.html?brand=jordan"       class="nav__dropdown-item">Jordan</a>
+            <a href="shop.html?brand=adidas"       class="nav__dropdown-item">Adidas</a>
+            <a href="shop.html?brand=puma"         class="nav__dropdown-item">Puma</a>
+            <a href="shop.html?brand=new-balance"  class="nav__dropdown-item">New Balance</a>
+            <a href="shop.html"                    class="nav__dropdown-item">All Brands</a>
+          </div>
+        </li>
+        <li><a href="shop.html?filter=new"  class="nav__link">New Drops</a></li>
+        <li><a href="shop.html?filter=sale" class="nav__link">Sale</a></li>
+        <li><a href="index.html#about"      class="nav__link">About</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search"><i class="ri-search-line"></i></button>
+        <button class="nav__icon-btn" aria-label="Account"><i class="ri-user-line"></i></button>
+        <a href="cart.html" class="nav__icon-btn" aria-label="Cart">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="nav__cart-count" aria-live="polite">0</span>
+        </a>
+        <span class="magnetic">
+          <a href="shop.html" class="btn btn--primary btn--nav">Shop Now</a>
+        </span>
+        <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile-menu" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <a href="index.html"             class="nav__mobile-link">Home</a>
+    <a href="shop.html"              class="nav__mobile-link">Shop</a>
+    <a href="shop.html?filter=new"   class="nav__mobile-link">New Drops</a>
+    <a href="shop.html?filter=sale"  class="nav__mobile-link">Sale</a>
+    <a href="index.html#about"       class="nav__mobile-link">About</a>
+    <div class="nav__mobile-divider"></div>
+    <div class="nav__mobile-actions">
+      <a href="cart.html" class="btn btn--outline">My Cart</a>
+      <a href="shop.html" class="btn btn--primary">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ──────────────────────────────────────
+         PAGE HEADER
+    ────────────────────────────────────── -->
+    <header class="shop-header">
+      <div class="shop-header__bg-text" aria-hidden="true">SHOP</div>
+      <div class="container shop-header__inner">
+        <div>
+          <p class="shop-header__eyebrow">Authenticated · Premium · Exclusive</p>
+          <h1 class="shop-header__title">ALL<br/>SNEAKERS</h1>
+        </div>
+        <p class="shop-header__count">
+          Showing <strong id="result-count">12</strong> styles
+        </p>
+      </div>
+    </header>
+
+    <!-- ──────────────────────────────────────
+         FILTER BAR
+    ────────────────────────────────────── -->
+    <div class="filter-bar" role="search" aria-label="Filter products">
+      <div class="container">
+        <div class="filter-bar__inner">
+
+          <!-- Brand -->
+          <div class="filter-group" role="group" aria-label="Filter by brand">
+            <span class="filter-group__label">Brand</span>
+            <button class="filter-pill active" data-group="brand" data-value="all">All</button>
+            <button class="filter-pill" data-group="brand" data-value="Nike">Nike</button>
+            <button class="filter-pill" data-group="brand" data-value="Jordan">Jordan</button>
+            <button class="filter-pill" data-group="brand" data-value="Adidas">Adidas</button>
+            <button class="filter-pill" data-group="brand" data-value="Puma">Puma</button>
+            <button class="filter-pill" data-group="brand" data-value="New Balance">NB</button>
+            <button class="filter-pill" data-group="brand" data-value="Converse">Converse</button>
+          </div>
+
+          <div class="filter-divider" aria-hidden="true"></div>
+
+          <!-- Price -->
+          <div class="filter-group" role="group" aria-label="Filter by price">
+            <span class="filter-group__label">Price</span>
+            <button class="filter-pill active" data-group="price" data-value="all">All</button>
+            <button class="filter-pill" data-group="price" data-value="under-100">Under $100</button>
+            <button class="filter-pill" data-group="price" data-value="100-150">$100–$150</button>
+            <button class="filter-pill" data-group="price" data-value="150-200">$150–$200</button>
+            <button class="filter-pill" data-group="price" data-value="over-200">$200+</button>
+          </div>
+
+          <!-- Sort -->
+          <div class="filter-sort">
+            <label class="filter-sort__label" for="sort-select">Sort:</label>
+            <select id="sort-select" class="filter-sort__select" aria-label="Sort products">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+              <option value="rating">Top Rated</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Active filter tags -->
+        <div id="active-filters" class="active-filters" style="display:none;" aria-live="polite"></div>
+
+      </div>
+    </div><!-- /filter-bar -->
+
+    <!-- ──────────────────────────────────────
+         PRODUCT GRID
+    ────────────────────────────────────── -->
+    <section class="shop-main" aria-label="Products">
+      <div class="container">
+
+        <!-- Results bar -->
+        <div class="results-bar">
+          <p class="results-bar__text">
+            Showing <strong id="shown-count">6</strong> of
+            <strong id="total-count">12</strong> sneakers
+          </p>
+          <div class="view-toggle" role="group" aria-label="View style">
+            <button class="view-btn active" aria-label="Grid view" id="grid-view-btn">
+              <i class="ri-grid-line"></i>
+            </button>
+            <button class="view-btn" aria-label="List view" id="list-view-btn">
+              <i class="ri-list-unordered"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cards render here -->
+        <div class="products-grid" id="products-grid" aria-live="polite" aria-label="Product list" data-anim="card-grid">
+          <!-- JS renders cards here -->
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="empty-state" aria-live="polite">
+          <div class="empty-state__icon"><i class="ri-search-line"></i></div>
+          <h2 class="empty-state__title">NO MATCHES</h2>
+          <p class="empty-state__text">
+            No sneakers match your current filters.
+            Try clearing the filters to see all styles.
+          </p>
+          <button class="btn btn--primary" onclick="document.querySelector('.filter-pill[data-value=\'all\']').click();">
+            Clear Filters
+          </button>
+        </div>
+
+        <!-- Load More -->
+        <div class="load-more-wrap" id="load-more-wrap">
+          <div class="load-more-progress">
+            <div class="load-more-progress__label">
+              <span>Showing <span id="shown-count-2">6</span> of <span id="total-count-2">12</span></span>
+              <span id="progress-pct">50%</span>
+            </div>
+            <div class="load-more-progress__track">
+              <div class="load-more-progress__fill" id="progress-fill" style="width:50%;"></div>
+            </div>
+          </div>
+          <span class="magnetic">
+            <button class="btn btn--outline load-more-btn" id="load-more-btn">
+              <span class="btn-text"><i class="ri-add-line"></i> Load More</span>
+              <span class="spinner"></span>
+            </button>
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER (minimal on shop page)
+  ══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="padding-top:var(--space-8);padding-bottom:var(--space-8);">
+        <p class="footer__copy">&copy; 2026 <span>The Snicker Lab</span>. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__legal-link">Privacy</a>
+          <a href="#" class="footer__legal-link">Terms</a>
+          <a href="index.html" class="footer__legal-link">← Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════ -->
+  <script type="module">
+    import { SoleCursor, MagneticEffect } from './js/cursor.js';
+    import { SoleNav }                    from './js/nav.js';
+    import { initBaseAnimations, initPageTransitions } from './js/animations.js';
+    import { initShop }                   from './js/shop.js';
+    import { initCartDrawer, refreshBadges } from './js/cart.js';
+    import { initPolish }                 from './js/polish.js';
+    import { initAuth }                   from './js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new SoleCursor();
+      new MagneticEffect();
+      new SoleNav();
+      initCartDrawer();
+      refreshBadges();
+      initPolish();
+      initAuth();
+      initShop();
+
+      window.addEventListener('load', () => {
+        initBaseAnimations();
+        initPageTransitions();
+      });
+    });
+  </script>
+
+</body>
+</html>

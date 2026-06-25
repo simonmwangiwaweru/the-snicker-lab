@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Buy premium sneakers at The Snicker Lab — authentic, verified, fast shipping." />
+  <title>Product | The Snicker Lab</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23FF3D00'/><text y='.9em' font-size='75' x='12'>S</text></svg>" />
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/shop.css" />
+  <link rel="stylesheet" href="css/product.css" />
+  <link rel="stylesheet" href="css/polish.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="page-transition"></div>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-mark">SL</div>
+        <span class="nav__logo-text">The Snicker<span>Lab</span></span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html"            class="nav__link">Home</a></li>
+        <li class="nav__dropdown">
+          <a href="shop.html" class="nav__link active">Shop <i class="ri-arrow-down-s-line" style="font-size:.85em;vertical-align:-1px;"></i></a>
+          <div class="nav__dropdown-menu">
+            <a href="shop.html?brand=nike"    class="nav__dropdown-item">Nike</a>
+            <a href="shop.html?brand=jordan"  class="nav__dropdown-item">Jordan</a>
+            <a href="shop.html?brand=adidas"  class="nav__dropdown-item">Adidas</a>
+            <a href="shop.html?brand=puma"    class="nav__dropdown-item">Puma</a>
+            <a href="shop.html?brand=new-balance" class="nav__dropdown-item">New Balance</a>
+            <a href="shop.html"               class="nav__dropdown-item">All Brands</a>
+          </div>
+        </li>
+        <li><a href="shop.html?filter=new"  class="nav__link">New Drops</a></li>
+        <li><a href="shop.html?filter=sale" class="nav__link">Sale</a></li>
+        <li><a href="index.html#about"      class="nav__link">About</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search"><i class="ri-search-line"></i></button>
+        <button class="nav__icon-btn" aria-label="Account"><i class="ri-user-line"></i></button>
+        <a href="cart.html" class="nav__icon-btn" aria-label="Cart">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="nav__cart-count" aria-live="polite">0</span>
+        </a>
+        <span class="magnetic">
+          <a href="shop.html" class="btn btn--primary btn--nav">Shop Now</a>
+        </span>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav__mobile-menu" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <a href="index.html"             class="nav__mobile-link">Home</a>
+    <a href="shop.html"              class="nav__mobile-link">Shop</a>
+    <a href="shop.html?filter=new"   class="nav__mobile-link">New Drops</a>
+    <a href="shop.html?filter=sale"  class="nav__mobile-link">Sale</a>
+    <a href="index.html#about"       class="nav__mobile-link">About</a>
+    <div class="nav__mobile-divider"></div>
+    <div class="nav__mobile-actions">
+      <a href="cart.html" class="btn btn--outline">My Cart</a>
+      <a href="shop.html" class="btn btn--primary">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── Breadcrumb ─────────────────────────────── -->
+    <div class="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb__list" aria-label="Breadcrumb">
+          <li class="breadcrumb__item"><a href="index.html">Home</a><i class="ri-arrow-right-s-line"></i></li>
+          <li class="breadcrumb__item"><a href="shop.html" id="breadcrumb-brand">Shop</a><i class="ri-arrow-right-s-line"></i></li>
+          <li class="breadcrumb__item breadcrumb__item--current" aria-current="page" id="breadcrumb-product">Product</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── Product Section ──────────────────────────── -->
+    <section class="product-section">
+      <div class="container">
+        <div class="product-grid">
+
+          <!-- ═══ LEFT: VIEWER ═══ -->
+          <div class="product-viewer" data-anim="fade-in">
+
+            <!-- 3D Canvas Viewer -->
+            <div class="viewer-3d" id="viewer-3d" role="img" aria-label="Interactive 3D shoe viewer — drag to rotate">
+
+              <!-- Three.js canvas -->
+              <canvas id="viewer-canvas"></canvas>
+
+              <!-- Shoe SVG overlay (CSS 3D rotates this) -->
+              <div class="viewer-shoe-overlay">
+                <div id="viewer-shoe-svg-wrap" class="viewer-shoe-svg" style="transition:filter 0.4s;">
+
+                  <!-- The hero product shoe SVG (colours updated by JS) -->
+                  <svg id="hero-product-svg" viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="pd-upper" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%"   stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#eeeeee"/>
+                      </linearGradient>
+                      <linearGradient id="pd-sole" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%"   stop-color="#e0e0e0"/>
+                        <stop offset="100%" stop-color="#c8c8c8"/>
+                      </linearGradient>
+                      <filter id="pd-shadow">
+                        <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#000" flood-opacity="0.5"/>
+                      </filter>
+                    </defs>
+
+                    <ellipse cx="400" cy="418" rx="285" ry="17" fill="rgba(0,0,0,0.28)"/>
+
+                    <g filter="url(#pd-shadow)">
+                      <!-- Outsole -->
+                      <path class="svg-outsole" d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#111"/>
+                      <!-- Midsole -->
+                      <path class="svg-sole" d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="url(#pd-sole)"/>
+                      <!-- Sole accent stripe -->
+                      <path class="svg-swoosh-sole" d="M138,308 C205,318 338,324 488,318 C572,314 638,302 660,292 L660,296 C636,308 570,320 488,324 C336,330 202,324 136,314 Z" fill="#FF3D00" opacity="0.6"/>
+                      <!-- Main upper -->
+                      <path class="svg-upper" d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="url(#pd-upper)"/>
+                      <!-- Toe cap -->
+                      <path class="svg-toe" d="M125,278 C128,250 142,220 170,200 C192,184 218,178 240,178 C215,205 182,240 172,296 Z" fill="#f7f7f7"/>
+                      <!-- Toe stitching -->
+                      <path d="M168,294 C176,248 208,216 245,196" stroke="#d0d0d0" stroke-width="1.8" fill="none" stroke-dasharray="7,5"/>
+                      <!-- Quarter panel -->
+                      <path d="M240,184 C310,168 392,162 470,168 C530,173 590,188 630,208" stroke="#d8d8d8" stroke-width="1.5" fill="none" stroke-dasharray="8,6"/>
+                      <!-- Heel -->
+                      <path class="svg-heel" d="M600,168 C638,178 668,212 676,252 C680,272 675,296 668,308 C655,288 640,258 620,232 C608,215 600,196 600,168 Z" fill="#e0e0e0"/>
+                      <!-- Heel stitching -->
+                      <path d="M608,176 C640,190 666,222 672,260" stroke="#c8c8c8" stroke-width="1.5" fill="none" stroke-dasharray="6,5"/>
+                      <!-- Heel tag -->
+                      <rect class="svg-heel-tag" x="644" y="218" width="32" height="50" rx="5" fill="#FF3D00"/>
+                      <text x="660" y="248" text-anchor="middle" fill="white" font-size="12" font-family="Arial" font-weight="900">SV</text>
+                      <!-- Collar -->
+                      <path d="M546,156 C582,152 622,164 648,188 C662,200 670,220 666,238 C648,214 618,196 588,184 C568,176 552,170 546,156 Z" fill="#dcdcdc"/>
+                      <!-- Lace panel -->
+                      <path d="M282,165 C302,155 352,147 412,145 C468,143 516,148 546,158 L546,232 C514,225 466,220 410,222 C354,224 304,228 282,240 Z" fill="#eeeeee"/>
+                      <!-- Laces -->
+                      <path d="M294,178 Q414,168 534,178" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+                      <path d="M294,196 Q414,186 534,196" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+                      <path d="M294,214 Q414,204 534,214" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+                      <path d="M296,232 Q414,222 534,232" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+                      <!-- Eyelets -->
+                      <line x1="330" y1="170" x2="330" y2="238" stroke="#d5d5d5" stroke-width="2.5"/>
+                      <line x1="370" y1="166" x2="370" y2="234" stroke="#d5d5d5" stroke-width="2.5"/>
+                      <line x1="450" y1="164" x2="450" y2="232" stroke="#d5d5d5" stroke-width="2.5"/>
+                      <line x1="490" y1="166" x2="490" y2="234" stroke="#d5d5d5" stroke-width="2.5"/>
+                      <line x1="530" y1="168" x2="530" y2="236" stroke="#d5d5d5" stroke-width="2.5"/>
+                      <circle cx="330" cy="174" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="330" cy="192" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="330" cy="210" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="330" cy="228" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="370" cy="172" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="370" cy="190" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="370" cy="208" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="370" cy="226" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="450" cy="168" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="450" cy="186" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="450" cy="204" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="450" cy="222" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="490" cy="170" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="490" cy="188" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="490" cy="206" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="490" cy="224" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="530" cy="172" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="530" cy="190" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="530" cy="208" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <circle cx="530" cy="226" r="5" fill="#d0d0d0" stroke="#bbb" stroke-width="1"/>
+                      <!-- Tongue -->
+                      <path d="M416,145 C432,137 470,135 488,146 L492,216 C474,210 432,210 412,216 Z" fill="#f8f8f8"/>
+                      <rect x="440" y="168" width="22" height="30" rx="3" fill="#FF3D00"/>
+                      <text x="451" y="188" text-anchor="middle" fill="white" font-size="10" font-family="Arial" font-weight="900">SV</text>
+                      <!-- Swoosh -->
+                      <path class="svg-swoosh" d="M196,284 C240,254 342,240 456,254 C520,263 576,282 568,302 C532,286 420,274 315,290 C260,298 196,314 196,284 Z" fill="#FF3D00"/>
+                      <path d="M206,274 C250,252 352,244 462,258" stroke="rgba(255,255,255,0.22)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                      <!-- Perforations on toe -->
+                      <circle cx="138" cy="272" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="150" cy="258" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="150" cy="282" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="162" cy="246" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="162" cy="268" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="162" cy="290" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="174" cy="242" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="174" cy="262" r="3.5" fill="#e8e8e8"/>
+                      <circle cx="174" cy="282" r="3.5" fill="#e8e8e8"/>
+                    </g>
+                  </svg>
+
+                </div>
+              </div>
+
+              <!-- Drag hint -->
+              <div class="viewer-hint"><i class="ri-drag-move-line"></i> Drag to rotate</div>
+
+              <!-- Control buttons -->
+              <div class="viewer-actions">
+                <button class="viewer-btn active" id="btn-rotate" title="Toggle auto-rotate" aria-label="Toggle auto-rotate">
+                  <i class="ri-restart-line"></i>
+                </button>
+                <button class="viewer-btn" id="btn-reset" title="Reset view" aria-label="Reset view">
+                  <i class="ri-focus-3-line"></i>
+                </button>
+              </div>
+
+              <!-- Auto-rotate badge -->
+              <div class="viewer-rotate-badge">
+                <i class="ri-loader-4-line"></i> 360°
+              </div>
+
+            </div><!-- /viewer-3d -->
+
+            <!-- Thumbnail strip -->
+            <div class="viewer-thumbnails" role="list" aria-label="Product views">
+              <div class="viewer-thumb active" role="listitem" title="Front view">
+                <svg viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#111"/>
+                  <path d="M120,298 C140,308 220,318 380,320 C520,322 615,310 635,298 L638,275 C615,290 530,305 380,305 C230,305 145,292 120,278 Z" fill="#e0e0e0"/>
+                  <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="white"/>
+                  <path d="M196,284 C240,254 342,240 456,254 C520,263 576,282 568,302 C532,286 420,274 315,290 C260,298 196,314 196,284 Z" fill="#FF3D00"/>
+                </svg>
+              </div>
+              <div class="viewer-thumb" role="listitem" title="Top view">
+                <svg viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="transform:rotateX(45deg) scale(0.9);">
+                  <path d="M105,348 C108,362 148,378 260,384 C360,390 520,386 640,372 C680,366 700,354 698,340 L688,326 C660,342 570,360 420,364 C270,368 148,358 108,338 Z" fill="#111"/>
+                  <path d="M125,278 C135,240 175,200 240,178 C305,156 390,150 480,165 C555,177 620,205 645,240 C658,260 650,280 638,295 C615,308 530,320 380,318 C230,316 140,300 125,278 Z" fill="#f5f5f5"/>
+                  <path d="M294,178 Q414,168 534,178" stroke="white" stroke-width="5" fill="none"/>
+                  <path d="M294,196 Q414,186 534,196" stroke="white" stroke-width="5" fill="none"/>
+                </svg>
+              </div>
+              <div class="viewer-thumb" role="listitem" title="Sole view">
+                <svg viewBox="0 0 780 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <ellipse cx="395" cy="320" rx="280" ry="130" fill="#111"/>
+                  <ellipse cx="395" cy="320" rx="260" ry="110" fill="#1a1a1a"/>
+                  <path d="M200,240 C250,230 530,230 590,240" stroke="#FF3D00" stroke-width="4" fill="none" opacity="0.7"/>
+                  <path d="M160,280 C200,270 580,270 620,280" stroke="#333" stroke-width="3" fill="none"/>
+                  <path d="M150,320 C190,310 590,310 630,320" stroke="#333" stroke-width="3" fill="none"/>
+                  <path d="M160,360 C200,350 580,350 620,360" stroke="#333" stroke-width="3" fill="none"/>
+                  <text x="395" y="340" text-anchor="middle" fill="#333" font-size="24" font-family="Arial" font-weight="900">SV</text>
+                </svg>
+              </div>
+              <div class="viewer-thumb" role="listitem" title="Back view">
+                <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <ellipse cx="200" cy="415" rx="130" ry="14" fill="rgba(0,0,0,0.25)"/>
+                  <path d="M80,350 C80,365 120,380 200,384 C280,388 320,373 320,350 L318,310 C315,330 275,345 200,348 C125,351 85,336 80,316 Z" fill="#111"/>
+                  <path d="M82,310 C85,328 126,342 200,345 C274,348 315,333 318,310 L316,260 C312,280 272,298 200,300 C128,302 88,284 82,260 Z" fill="#e0e0e0"/>
+                  <path d="M84,260 C88,278 128,295 200,297 C272,299 312,282 316,264 L314,180 C308,210 268,235 200,238 C132,241 92,216 84,186 Z" fill="white"/>
+                  <rect x="168" y="140" width="64" height="80" rx="20" fill="#e8e8e8"/>
+                  <rect x="182" y="180" width="36" height="55" rx="8" fill="#FF3D00"/>
+                  <text x="200" y="213" text-anchor="middle" fill="white" font-size="14" font-family="Arial" font-weight="900">SV</text>
+                </svg>
+              </div>
+            </div><!-- /thumbnails -->
+
+          </div><!-- /product-viewer -->
+
+          <!-- ═══ RIGHT: INFO ═══ -->
+          <div class="product-info">
+
+            <!-- Header -->
+            <div class="product-info__header" data-anim="fade-up">
+              <p class="product-info__brand" id="product-brand">Nike</p>
+              <h1 class="product-info__name" id="product-name">Air Force 1 '07 Low</h1>
+              <p class="product-info__sku" id="product-sku">SKU: CW2288-111</p>
+            </div>
+
+            <!-- Rating row -->
+            <div class="product-info__rating" data-anim="fade-up">
+              <div class="rating-stars" id="product-rating-stars" aria-label="Rating"></div>
+              <span class="rating-value" id="product-rating-val">4.8</span>
+              <div class="rating-divider"></div>
+              <a href="#tab-reviews" class="rating-count" id="product-review-count" onclick="document.querySelector('[data-tab=reviews]').click();">312 reviews</a>
+              <div class="rating-divider"></div>
+              <span class="stock-badge stock-badge--in" id="product-stock">
+                <i class="ri-checkbox-circle-fill"></i> In Stock
+              </span>
+            </div>
+
+            <!-- Price -->
+            <div class="product-info__price" data-anim="fade-up">
+              <span class="price-current" id="product-price">$110</span>
+              <span class="price-old" id="product-price-old" style="display:none;"></span>
+              <div id="price-save-wrap" style="display:none;">
+                <span class="price-save" id="product-save"></span>
+              </div>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <!-- Color picker -->
+            <div class="color-section" data-anim="fade-up">
+              <p class="section-label">
+                Colour: <span id="selected-color-name">White/White</span>
+              </p>
+              <div class="color-swatches" id="color-swatches" role="group" aria-label="Select colour"></div>
+            </div>
+
+            <!-- Size selector -->
+            <div class="size-section" data-anim="fade-up">
+              <p class="section-label">
+                Size (US): <span id="selected-size-label-wrap" style="display:none;">
+                  <span id="selected-size-label"></span>
+                </span>
+                <span class="size-guide-link" tabindex="0" role="button">
+                  <i class="ri-ruler-line"></i> Size Guide
+                </span>
+              </p>
+              <div class="size-grid" id="size-grid" role="group" aria-label="Select size"></div>
+              <p class="size-prompt" id="size-prompt">
+                <i class="ri-error-warning-line"></i> Please select a size to continue
+              </p>
+            </div>
+
+            <!-- Qty + Add to cart -->
+            <div data-anim="fade-up">
+              <div class="purchase-row">
+                <div class="qty-selector" role="group" aria-label="Quantity">
+                  <button class="qty-btn" id="qty-dec" aria-label="Decrease quantity" disabled>−</button>
+                  <span class="qty-value" id="qty-value" aria-live="polite">1</span>
+                  <button class="qty-btn" id="qty-inc" aria-label="Increase quantity">+</button>
+                </div>
+                <span class="magnetic" style="flex:1;">
+                  <button class="add-to-cart-btn" id="add-to-cart-btn" aria-label="Add to cart">
+                    <i class="ri-shopping-bag-line"></i> Add to Cart
+                  </button>
+                </span>
+                <button class="wishlist-btn" id="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">
+                  <i class="ri-heart-line"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Trust badges -->
+            <div class="trust-badges" data-anim="fade-up">
+              <div class="trust-badge">
+                <i class="ri-shield-check-line"></i>
+                <strong>100% Authentic</strong>
+                <span>Verified every pair</span>
+              </div>
+              <div class="trust-badge">
+                <i class="ri-truck-line"></i>
+                <strong>Fast Shipping</strong>
+                <span>1–3 business days</span>
+              </div>
+              <div class="trust-badge">
+                <i class="ri-refresh-line"></i>
+                <strong>Free Returns</strong>
+                <span>30-day no hassle</span>
+              </div>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <!-- Accordion -->
+            <div class="accordion" data-anim="fade-up">
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="true">
+                  <span><i class="ri-information-line" style="color:var(--clr-primary);margin-right:var(--space-2);"></i> Product Details</span>
+                  <i class="ri-add-line"></i>
+                </button>
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    <ul>
+                      <li>Premium leather upper for durability and easy care</li>
+                      <li>Perforations on the toe for breathability</li>
+                      <li>Encapsulated Air-Sole unit for lightweight cushioning</li>
+                      <li>Non-marking rubber outsole for traction</li>
+                      <li>Padded, low-cut collar for a clean look</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                  <span><i class="ri-truck-line" style="color:var(--clr-primary);margin-right:var(--space-2);"></i> Shipping & Returns</span>
+                  <i class="ri-add-line"></i>
+                </button>
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    <ul>
+                      <li>Standard shipping: 3–5 business days (free over $100)</li>
+                      <li>Express shipping: 1–2 business days ($12)</li>
+                      <li>Next-day delivery available in select cities</li>
+                      <li>Free returns within 30 days — unworn, original box</li>
+                      <li>Return label emailed automatically on request</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" aria-expanded="false">
+                  <span><i class="ri-shield-check-line" style="color:var(--clr-primary);margin-right:var(--space-2);"></i> Authentication</span>
+                  <i class="ri-add-line"></i>
+                </button>
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    Every pair from The Snicker Lab goes through a 12-point verification process before shipping.
+                    This includes stitching inspection, sole analysis, box label check, and QR code
+                    verification against Nike's internal database. Your authentication certificate
+                    ships with every order.
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /accordion -->
+
+          </div><!-- /product-info -->
+
+        </div><!-- /product-grid -->
+      </div>
+    </section>
+
+    <!-- ── Tabs Section ─────────────────────────── -->
+    <section class="tabs-section" aria-label="Product information tabs">
+      <div class="container">
+
+        <!-- Tab nav -->
+        <div class="tabs-nav" role="tablist" aria-label="Product information">
+          <button class="tab-btn active" data-tab="description" role="tab" aria-selected="true">Description</button>
+          <button class="tab-btn" data-tab="specs"       role="tab" aria-selected="false">Specifications</button>
+          <button class="tab-btn" data-tab="reviews"     role="tab" aria-selected="false">Reviews</button>
+        </div>
+
+        <!-- Description -->
+        <div class="tab-panel active" id="tab-description" role="tabpanel">
+          <p class="tab-desc__lead" id="tab-desc-lead"></p>
+          <p class="tab-desc__body" id="tab-desc-body"></p>
+        </div>
+
+        <!-- Specs -->
+        <div class="tab-panel" id="tab-specs" role="tabpanel">
+          <div class="specs-grid" id="specs-grid"></div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="tab-panel" id="tab-reviews" role="tabpanel">
+          <div class="reviews-summary">
+            <div class="reviews-score">
+              <div class="reviews-score__num" id="review-avg">4.8</div>
+              <div class="reviews-score__stars" id="review-avg-stars"></div>
+              <div class="reviews-score__count" id="review-total">312 ratings</div>
+            </div>
+            <div class="reviews-bars" id="review-bars"></div>
+          </div>
+          <div class="reviews-list" id="review-list"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Related Products ─────────────────────── -->
+    <section class="related-section" aria-label="You may also like">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--space-10);">
+          <div>
+            <p class="section-eyebrow">You May Also Like</p>
+            <h2 class="section-title">RELATED<br/>STYLES</h2>
+          </div>
+          <a href="shop.html" class="section-link">View All <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="related-grid" id="related-grid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="padding-top:var(--space-8);padding-bottom:var(--space-8);">
+        <p class="footer__copy">&copy; 2026 <span>The Snicker Lab</span>. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#"        class="footer__legal-link">Privacy</a>
+          <a href="#"        class="footer__legal-link">Terms</a>
+          <a href="shop.html" class="footer__legal-link">← Back to Shop</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════ -->
+  <script type="module">
+    import { SoleCursor, MagneticEffect } from './js/cursor.js';
+    import { SoleNav }                    from './js/nav.js';
+    import { initBaseAnimations, initPageTransitions } from './js/animations.js';
+    import { initProduct }                from './js/product.js';
+    import { initCartDrawer, refreshBadges } from './js/cart.js';
+    import { initPolish, showToast }      from './js/polish.js';
+    import { initAuth }                   from './js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new SoleCursor();
+      new MagneticEffect();
+      new SoleNav();
+      initCartDrawer();
+      refreshBadges();
+      initPolish();
+      initAuth();
+      initProduct();
+
+      window.addEventListener('load', () => {
+        initBaseAnimations();
+        initPageTransitions();
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

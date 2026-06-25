@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — The Snicker Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/polish.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line"></i></button>
+  <div id="cursor-dot"  class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
+  <div class="page-transition" id="page-transition"></div>
+
+  <!-- ══════════════════════════════ NAV ════════════════════════════════════ -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="The Snicker Lab home">
+        <span class="nav__logo-text">The Snicker<span>Lab</span></span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li class="nav__item--dropdown">
+          <a href="shop.html" class="nav__link">Shop <i class="ri-arrow-down-s-line"></i></a>
+          <div class="nav__dropdown">
+            <a href="shop.html?brand=nike"   class="nav__dropdown-link">Nike</a>
+            <a href="shop.html?brand=jordan" class="nav__dropdown-link">Jordan</a>
+            <a href="shop.html?brand=adidas" class="nav__dropdown-link">Adidas</a>
+            <a href="shop.html?filter=new"   class="nav__dropdown-link">New Drops</a>
+            <a href="shop.html?filter=sale"  class="nav__dropdown-link">Sale</a>
+          </div>
+        </li>
+        <li><a href="shop.html?filter=new" class="nav__link">New Drops</a></li>
+        <li><a href="#" class="nav__link">About</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search"><i class="ri-search-line"></i></button>
+        <button class="nav__icon-btn" aria-label="Wishlist"><i class="ri-heart-line"></i></button>
+        <button class="nav__icon-btn" aria-label="Account"><i class="ri-user-line"></i></button>
+        <a href="cart.html" class="nav__icon-btn nav__icon-btn--cart" aria-label="Cart">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="nav__cart-count" aria-label="items in cart"></span>
+        </a>
+        <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav class="nav__mobile-links">
+        <a href="index.html"           class="nav__mobile-link">Home</a>
+        <a href="shop.html"            class="nav__mobile-link">Shop</a>
+        <a href="shop.html?filter=new" class="nav__mobile-link">New Drops</a>
+        <a href="shop.html?filter=sale"class="nav__mobile-link">Sale</a>
+        <a href="#"                    class="nav__mobile-link">About</a>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════ PAGE HEADER ════════════════════════════════ -->
+  <header class="cart-page-header">
+    <div class="container">
+      <p class="cart-page-header__bg-text">CART</p>
+      <h1 class="cart-page-header__title">Your Cart</h1>
+      <p class="cart-page-header__sub" id="cart-item-count">0 items</p>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════ EMPTY STATE ════════════════════════════════ -->
+  <div class="cart-empty-state" id="cart-empty">
+    <div class="cart-empty-state__icon"><i class="ri-shopping-bag-line"></i></div>
+    <h2 class="cart-empty-state__title">Your cart is empty</h2>
+    <p class="cart-empty-state__sub">Looks like you haven't added any sneakers yet.</p>
+    <a href="shop.html" class="btn btn--primary magnetic">
+      <span class="magnetic__inner"><i class="ri-arrow-left-line"></i> Browse Sneakers</span>
+    </a>
+  </div>
+
+  <!-- ══════════════════════════ CART LAYOUT ════════════════════════════════ -->
+  <main class="cart-page" id="cart-page-layout">
+    <div class="container">
+      <div class="cart-page__layout">
+
+        <!-- Items Column -->
+        <div class="cart-page__items-col">
+          <div class="cart-col-header">
+            <span>Product</span>
+            <span>Qty</span>
+            <span>Price</span>
+            <span></span>
+          </div>
+          <div id="cart-items-list" class="cart-items-list"></div>
+          <a href="shop.html" class="cart-continue-link">
+            <i class="ri-arrow-left-line"></i> Continue Shopping
+          </a>
+        </div>
+
+        <!-- Order Summary -->
+        <aside class="cart-page__summary" aria-label="Order summary">
+          <h2 class="cart-summary__title">Order Summary</h2>
+
+          <div class="promo-section">
+            <label class="promo-section__label" for="promo-input">Promo Code</label>
+            <div class="promo-section__row">
+              <input type="text" id="promo-input" class="promo-input" placeholder="e.g. SNICK10" autocomplete="off">
+              <button class="btn btn--outline promo-apply-btn" id="promo-apply-btn">Apply</button>
+            </div>
+            <p class="promo-success" id="promo-msg"></p>
+          </div>
+
+          <div class="cart-summary__lines">
+            <div class="cart-summary__line">
+              <span>Subtotal</span>
+              <span id="summary-subtotal">$0.00</span>
+            </div>
+            <div class="cart-summary__line" id="summary-discount-row" style="display:none;">
+              <span style="color:#22c55e;"><i class="ri-coupon-3-line"></i> Discount</span>
+              <span id="summary-discount" style="color:#22c55e;">-$0.00</span>
+            </div>
+            <div class="cart-summary__line">
+              <span>Shipping</span>
+              <span id="summary-shipping">$0.00</span>
+            </div>
+            <div class="cart-summary__line">
+              <span>Tax (8%)</span>
+              <span id="summary-tax">$0.00</span>
+            </div>
+          </div>
+
+          <p class="free-ship-note" id="free-ship-note"></p>
+
+          <div class="cart-summary__total">
+            <span>Total</span>
+            <span id="summary-total">$0.00</span>
+          </div>
+
+          <a href="checkout.html" class="btn btn--primary cart-summary__checkout-btn magnetic">
+            <span class="magnetic__inner">
+              <i class="ri-secure-payment-line"></i> Checkout Securely
+            </span>
+          </a>
+
+          <div class="cart-summary__trust">
+            <span><i class="ri-shield-check-line"></i> SSL Secured</span>
+            <span><i class="ri-truck-line"></i> Free Returns</span>
+            <span><i class="ri-bank-card-line"></i> Secure Payments</span>
+          </div>
+
+          <div class="cart-summary__payment-icons">
+            <i class="ri-visa-line"></i>
+            <i class="ri-mastercard-line"></i>
+            <i class="ri-paypal-line"></i>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ════════════════════════════ FOOTER ══════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">The Snicker<span>Lab</span></a>
+          <p class="footer__tagline">Premium sneakers. Unmatched style.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="footer__social" aria-label="TikTok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="footer__social" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Shop</h4>
+          <ul class="footer__links">
+            <li><a href="shop.html?brand=nike">Nike</a></li>
+            <li><a href="shop.html?brand=jordan">Jordan</a></li>
+            <li><a href="shop.html?filter=new">New Drops</a></li>
+            <li><a href="shop.html?filter=sale">Sale</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Support</h4>
+          <ul class="footer__links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Size Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Contact</h4>
+          <ul class="footer__links">
+            <li><a href="#">support@thesnickerlab.com</a></li>
+            <li><a href="#">+1 800 SOLE-VAULT</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 The Snicker Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module">
+    import { SoleCursor, MagneticEffect } from './js/cursor.js';
+    import { SoleNav }                    from './js/nav.js';
+    import { initBaseAnimations, initPageTransitions } from './js/animations.js';
+    import { initCartDrawer, initCartPage, refreshBadges } from './js/cart.js';
+    import { initPolish }                 from './js/polish.js';
+    import { initAuth }                   from './js/auth.js';
+
+    new SoleCursor();
+    new MagneticEffect();
+    new SoleNav();
+    initBaseAnimations();
+    initPageTransitions();
+    initCartDrawer();
+    initCartPage();
+    refreshBadges();
+    initPolish();
+    initAuth();
+  </script>
+</body>
+</html>
