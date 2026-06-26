@@ -139,8 +139,8 @@ const PRODUCTS = [
   },
 ];
 
-// ── SVG shoe builder (generates unique shoe per product) ──────────────────────
-function buildShoeSVG(product) {
+// ── SLG shoe builder (generates unique shoe per product) ──────────────────────
+function buildShoeSLG(product) {
   const { shoeColor, swooshColor, heelColor } = product;
 
   const palettes = {
@@ -188,7 +188,7 @@ function buildShoeSVG(product) {
   <path d="M430,155 C447,145 478,143 494,154 L497,214 C479,208 440,208 426,214 Z" fill="rgba(200,200,200,0.3)"/>
   <path d="M600,168 C638,178 668,212 676,252 C680,272 675,296 668,308 C655,288 640,258 620,232 C608,215 600,196 600,168 Z" fill="rgba(128,128,128,0.18)"/>
   <rect x="640" y="218" width="28" height="44" rx="4" fill="${heelColor}"/>
-  <text x="654" y="245" text-anchor="middle" fill="white" font-size="10" font-family="Arial" font-weight="900">SV</text>
+  <text x="654" y="245" text-anchor="middle" fill="white" font-size="10" font-family="Arial" font-weight="900">SL</text>
 </svg>`;
 }
 
@@ -267,7 +267,7 @@ function buildCard(product) {
     <a href="product.html?id=${product.id}" class="product-card__link" aria-label="${product.name}" style="display:contents;">
       <div class="product-card__img-wrap">
         <div class="product-card__bg" style="background: ${product.bg};"></div>
-        ${buildShoeSVG(product)}
+        ${buildShoeSLG(product)}
         ${renderBadge(product.badge)}
         <div class="product-card__quick-view">
           <i class="ri-eye-line"></i> Quick View
