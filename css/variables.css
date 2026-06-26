@@ -1,18 +1,23 @@
 :root {
   /* ── Colors ── */
-  --clr-primary:      #FF3D00;
-  --clr-primary-dark: #CC3100;
-  --clr-accent:       #00E5FF;
-  --clr-accent-dark:  #00B8CC;
+  --clr-primary:      #E5001C;
+  --clr-primary-dark: #B8001A;
+  --clr-primary-light:#FFF0F2;
 
-  --clr-bg-dark:      #0A0A0A;
-  --clr-bg-dark-2:    #111111;
-  --clr-bg-dark-3:    #1A1A1A;
-  --clr-bg-light:     #F5F5F5;
-  --clr-bg-light-2:   #EBEBEB;
+  --clr-bg:           #FFFFFF;
+  --clr-bg-alt:       #F7F4EF;
+  --clr-bg-warm:      #EDE8E0;
+  --clr-bg-dark:      #111111;
+  --clr-bg-dark-2:    #1A1A1A;
+  --clr-bg-dark-3:    #222222;
 
+  --clr-text:         #111111;
+  --clr-text-muted:   #666666;
+  --clr-text-light:   #999999;
   --clr-white:        #FFFFFF;
   --clr-black:        #000000;
+  --clr-border:       #E8E4DF;
+
   --clr-gray-1:       #888888;
   --clr-gray-2:       #555555;
   --clr-gray-3:       #333333;
@@ -32,7 +37,7 @@
   --fs-4xl:  4rem;
   --fs-5xl:  5rem;
   --fs-6xl:  7rem;
-  --fs-hero: clamp(4rem, 10vw, 9rem);
+  --fs-hero: clamp(3.5rem, 7vw, 6.5rem);
 
   --fw-regular: 400;
   --fw-medium:  500;
@@ -46,6 +51,7 @@
   --space-4:  1rem;
   --space-5:  1.25rem;
   --space-6:  1.5rem;
+  --space-7:  1.75rem;
   --space-8:  2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
@@ -55,9 +61,9 @@
   --space-32: 8rem;
 
   /* ── Layout ── */
-  --max-width:    1400px;
-  --nav-height:   80px;
-  --section-pad:  clamp(4rem, 8vw, 8rem);
+  --max-width:    1360px;
+  --nav-height:   72px;
+  --section-pad:  clamp(4rem, 8vw, 7rem);
 
   /* ── Borders & Radius ── */
   --radius-sm:   6px;
@@ -67,11 +73,10 @@
   --radius-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm:  0 2px 8px rgba(0,0,0,0.12);
-  --shadow-md:  0 8px 24px rgba(0,0,0,0.20);
-  --shadow-lg:  0 20px 60px rgba(0,0,0,0.35);
-  --shadow-glow-primary: 0 0 40px rgba(255,61,0,0.45);
-  --shadow-glow-accent:  0 0 40px rgba(0,229,255,0.35);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:  0 8px 24px rgba(0,0,0,0.10);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.14);
+  --shadow-glow-primary: 0 8px 32px rgba(229,0,28,0.35);
 
   /* ── Transitions ── */
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);

@@ -226,7 +226,7 @@ body:not(.kb-nav) *:focus {
   display: block;
   height: 2px;
   width: 100%;
-  background: var(--clr-white);
+  background: var(--clr-text);
   border-radius: var(--radius-full);
   transition: transform 0.35s var(--ease-out), opacity 0.2s;
   transform-origin: center;
